@@ -50,6 +50,10 @@
       postgresql_user: name=helloworld password=helloworld role_attr_flags=CREATEDB
       sudo_user: postgres
 
+    - name: Create Critiqual user
+      postgresql_user: name=critiqual password=critiqual role_attr_flags=CREATEDB
+      sudo_user: postgres
+
     - name: Install rails
       gem:
         name: rails
