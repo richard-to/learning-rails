@@ -45,12 +45,14 @@
         line: vagrant ALL=(postgres) ALL
         validate: 'visudo -cf %s'
 
-    - name: Create Helloworld database
-      postgresql_db: name=hellworld
-      sudo_user: postgres
-
     - name: Create Helloworld user
-      postgresql_user: db=hellworld name=hellworld
+      postgresql_user: name=helloworld password=helloworld role_attr_flags=CREATEDB
       sudo_user: postgres
 
-    - gem: name=rails version=4.2.0 executable={{gem_path}}
+    - name: Install rails
+      gem:
+        name: rails
+        version: 4.2.0
+        state: present
+        user_install: no
+        executable: "{{gem_path}}"

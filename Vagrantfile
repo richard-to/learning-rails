@@ -7,7 +7,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.box = "chef/ubuntu-14.04"
 
-  config.vm.network "forwarded_port", guest: 80, host: 8080
+  config.vm.network "forwarded_port", guest: 3000, host: 3000
 
   config.vm.provider "vmware_fusion" do |vf|
     vf.vmx["memsize"] = "1024"
