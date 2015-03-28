@@ -4,25 +4,53 @@
   roles:
     - role: znzj.rbenv
       rbenv_ruby_version: 2.2.1
+  vars:
+    - gem_path: "{{rbenv_root}}/shims/gem"
   tasks:
     - apt_repository: repo=ppa:chris-lea/node.js
     - apt: update_cache=yes
-
-    - apt: name=git-core
-    - apt: name=curl
-    - apt: name=zlib1g-dev
-    - apt: name=build-essential
-    - apt: name=libssl-dev
-    - apt: name=libreadline-dev
-    - apt: name=libyaml-dev
-    - apt: name=libsqlite3-dev
-    - apt: name=sqlite3
-    - apt: name=libxml2-dev
-    - apt: name=libxslt1-dev
-    - apt: name=libcurl4-openssl-dev
-    - apt: name=python-software-properties
-    - apt: name=libffi-dev
-
     - apt: name=nodejs
 
-    - gem: name=bundler
+    - name: Install ruby dependencies
+      apt: name={{item}}
+      with_items:
+        - git-core
+        - curl
+        - zlib1g-dev
+        - build-essential
+        - libssl-dev
+        - libreadline-dev
+        - libyaml-dev
+        - libsqlite3-dev
+        - sqlite3
+        - libxml2-dev
+        - libxslt1-dev
+        - libcurl4-openssl-dev
+        - python-software-properties
+        - libffi-dev
+
+    - name: Install Postgres dependencies
+      apt: name={{item}}
+      with_items:
+        - postgresql
+        - postgresql-contrib
+        - libpq-dev
+        - python-dev
+        - python-pip
+    - pip: name=psycopg2
+
+    - name: Allow vagrant to sudo as postgres
+      lineinfile:
+        dest: /etc/sudoers
+        line: vagrant ALL=(postgres) ALL
+        validate: 'visudo -cf %s'
+
+    - name: Create Helloworld database
+      postgresql_db: name=hellworld
+      sudo_user: postgres
+
+    - name: Create Helloworld user
+      postgresql_user: db=hellworld name=hellworld
+      sudo_user: postgres
+
+    - gem: name=rails version=4.2.0 executable={{gem_path}}
