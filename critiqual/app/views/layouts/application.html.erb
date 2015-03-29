@@ -1,14 +1,47 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Critiqual</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
+    <title>Critiqual</title>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
 </head>
 <body>
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="#">Critiqual</a>
+            </div>
+            <ul class="nav navbar-nav navbar-right">
+                <% if user_signed_in? %>
+                  <li><%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %></li>
+                  <li><%= link_to "Sign out", destroy_user_session_path, :method => :delete, :class => 'navbar-link'  %></li>
+                <% else %>
+                  <li><%= link_to "Register", new_user_registration_path, :class => 'navbar-link'  %></li>
+                  <li><%= link_to "Sign in", new_user_session_path, :class => 'navbar-link'  %></li>
+                <% end %>
+            </ul>
+        </div>
+    </nav>
 
-<%= yield %>
+    <div class="container">
+        <% if notice %>
+            <br />
+            <p class="alert alert-success"><%= notice %></p>
+        <% end %>
 
+        <% if alert %>
+            <br />
+            <p class="alert alert-danger"><%= alert %></p>
+        <% end %>
+
+        <%= yield %>
+    </div>
 </body>
 </html>
