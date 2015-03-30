@@ -1,5 +1,6 @@
 class StoriesController < ApplicationController
   before_action :set_story, only: [:show, :edit, :update, :destroy]
+  load_and_authorize_resource
 
   # GET /stories
   # GET /stories.json
@@ -69,6 +70,6 @@ class StoriesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def story_params
-      params.require(:story).permit(:title, :content, :word_count, :user_id)
+      params.require(:story).permit(:title, :story, :authors_note, :genre_id)
     end
 end

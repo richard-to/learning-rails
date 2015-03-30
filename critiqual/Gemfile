@@ -26,6 +26,8 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 # Authentication
 gem 'devise'
+# Roles
+gem "cancancan"
 
 # Date/Time formatting
 gem 'local_time'

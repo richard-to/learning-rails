@@ -18,7 +18,10 @@
     <div class="row">
       <div class="col-md-6 col-md-offset-3">
         <h3><%= @story.title %></h3>
-        <p><%= simple_format @story.content %></p>
+        <p><em><%= simple_format @story.authors_note %></em></p>
+        <p><em><%= simple_format @story.genre.name %></em></p>
+        <p><em><%= @story.word_count %> words</em></p>
+        <p><%= simple_format @story.story %></p>
       </div>
     </div>
   </div>

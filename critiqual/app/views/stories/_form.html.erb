@@ -16,14 +16,27 @@
   <% end %>
 
   <div class="form-group">
+    <%= f.label :genre_id, "Genre"  %>
+    <%= f.collection_select :genre_id, Genre.all, :id, :name, {}, {:class=> 'form-control'} %>
+  </div>
+
+  <div class="form-group">
     <%= f.label :title  %>
     <%= f.text_field :title, :class => 'form-control' %>
     <%= error_span(@story[:title]) %>
   </div>
+
   <div class="form-group">
-    <%= f.label :content, "Story" %>
-    <%= f.text_area :content, :class => 'form-control', :rows => 20 %>
-    <%= error_span(@story[:content]) %>
+    <%= f.label :authors_note %>
+    <%= f.text_area :authors_note, :class => 'form-control', :rows => 7 %>
+    <%= error_span(@story[:authors_note]) %>
+  </div>
+
+
+  <div class="form-group">
+    <%= f.label :story %>
+    <%= f.text_area :story, :class => 'form-control', :rows => 20 %>
+    <%= error_span(@story[:story]) %>
   </div>
 
   <div class="form-group">

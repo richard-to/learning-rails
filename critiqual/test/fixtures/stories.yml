@@ -1,13 +1,15 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  title: MyString
-  content: MyText
-  word_count: 1
-  user_id: 
+  title: Title 1
+  story: Story 1
+  user: one
+  genre: one
 
 two:
-  title: MyString
-  content: MyText
-  word_count: 1
-  user_id: 
+  title: Title 2
+  story: Story 2
+  authors_note: Author note 2
+  user: one
+  genre: two
+

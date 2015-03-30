@@ -1,8 +1,11 @@
 require 'test_helper'
 
 class StoriesControllerTest < ActionController::TestCase
+  include Devise::TestHelpers
+
   setup do
     @story = stories(:one)
+    sign_in users(:one)
   end
 
   test "should get index" do
@@ -18,7 +21,7 @@ class StoriesControllerTest < ActionController::TestCase
 
   test "should create story" do
     assert_difference('Story.count') do
-      post :create, story: { content: @story.content, title: @story.title, user_id: @story.user_id, word_count: @story.word_count }
+      post :create, story: { title: @story.title, story: @story.story, genre: @story.genre }
     end
 
     assert_redirected_to story_path(assigns(:story))
@@ -35,7 +38,7 @@ class StoriesControllerTest < ActionController::TestCase
   end
 
   test "should update story" do
-    patch :update, id: @story, story: { content: @story.content, title: @story.title, user_id: @story.user_id, word_count: @story.word_count }
+    patch :update, id: @story, story: { title: @story.title, story: @story.story, genre: @story.genre }
     assert_redirected_to story_path(assigns(:story))
   end
 
